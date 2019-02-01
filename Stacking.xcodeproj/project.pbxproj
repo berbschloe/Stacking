@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		774C5C492204BE1600162228 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774C5C412204BE1600162228 /* ViewController.swift */; };
+		774C5C4A2204BE1600162228 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 774C5C422204BE1600162228 /* Assets.xcassets */; };
+		774C5C4B2204BE1600162228 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774C5C432204BE1600162228 /* LaunchScreen.storyboard */; };
+		774C5C4C2204BE1600162228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774C5C452204BE1600162228 /* Main.storyboard */; };
+		774C5C4D2204BE1600162228 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774C5C472204BE1600162228 /* AppDelegate.swift */; };
 		778C98AA21E013570066F28A /* Stacking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778C98A021E013570066F28A /* Stacking.framework */; };
 		778C98AF21E013570066F28A /* StackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C98AE21E013570066F28A /* StackingTests.swift */; };
 		778C98B121E013570066F28A /* Stacking.h in Headers */ = {isa = PBXBuildFile; fileRef = 778C98A321E013570066F28A /* Stacking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +30,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		774C5C2E2204BDE500162228 /* StackingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		774C5C412204BE1600162228 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		774C5C422204BE1600162228 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		774C5C442204BE1600162228 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		774C5C462204BE1600162228 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		774C5C472204BE1600162228 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		774C5C512204C17100162228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		778C98A021E013570066F28A /* Stacking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stacking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		778C98A321E013570066F28A /* Stacking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stacking.h; sourceTree = "<group>"; };
 		778C98A421E013570066F28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +48,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		774C5C2B2204BDE500162228 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		778C989D21E013570066F28A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,10 +73,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		774C5C402204BE1600162228 /* StackingExample */ = {
+			isa = PBXGroup;
+			children = (
+				774C5C472204BE1600162228 /* AppDelegate.swift */,
+				774C5C412204BE1600162228 /* ViewController.swift */,
+				774C5C452204BE1600162228 /* Main.storyboard */,
+				774C5C432204BE1600162228 /* LaunchScreen.storyboard */,
+				774C5C422204BE1600162228 /* Assets.xcassets */,
+				774C5C512204C17100162228 /* Info.plist */,
+			);
+			path = StackingExample;
+			sourceTree = SOURCE_ROOT;
+		};
 		778C989621E013570066F28A = {
 			isa = PBXGroup;
 			children = (
 				778C98A221E013570066F28A /* Stacking */,
+				774C5C402204BE1600162228 /* StackingExample */,
 				778C98AD21E013570066F28A /* StackingTests */,
 				778C98A121E013570066F28A /* Products */,
 			);
@@ -68,6 +101,7 @@
 			children = (
 				778C98A021E013570066F28A /* Stacking.framework */,
 				778C98A921E013570066F28A /* StackingTests.xctest */,
+				774C5C2E2204BDE500162228 /* StackingExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +140,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		774C5C2D2204BDE500162228 /* StackingExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 774C5C3F2204BDE600162228 /* Build configuration list for PBXNativeTarget "StackingExample" */;
+			buildPhases = (
+				774C5C2A2204BDE500162228 /* Sources */,
+				774C5C2B2204BDE500162228 /* Frameworks */,
+				774C5C2C2204BDE500162228 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StackingExample;
+			productName = StackingExample;
+			productReference = 774C5C2E2204BDE500162228 /* StackingExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		778C989F21E013570066F28A /* Stacking */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 778C98B421E013570066F28A /* Build configuration list for PBXNativeTarget "Stacking" */;
@@ -152,6 +203,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Brandon Erbschloe";
 				TargetAttributes = {
+					774C5C2D2204BDE500162228 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					778C989F21E013570066F28A = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
@@ -167,6 +221,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 778C989621E013570066F28A;
 			productRefGroup = 778C98A121E013570066F28A /* Products */;
@@ -175,11 +230,22 @@
 			targets = (
 				778C989F21E013570066F28A /* Stacking */,
 				778C98A821E013570066F28A /* StackingTests */,
+				774C5C2D2204BDE500162228 /* StackingExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		774C5C2C2204BDE500162228 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				774C5C4C2204BE1600162228 /* Main.storyboard in Resources */,
+				774C5C4A2204BE1600162228 /* Assets.xcassets in Resources */,
+				774C5C4B2204BE1600162228 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		778C989E21E013570066F28A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,6 +263,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		774C5C2A2204BDE500162228 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				774C5C4D2204BE1600162228 /* AppDelegate.swift in Sources */,
+				774C5C492204BE1600162228 /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		778C989C21E013570066F28A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -224,7 +299,62 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		774C5C432204BE1600162228 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				774C5C442204BE1600162228 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		774C5C452204BE1600162228 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				774C5C462204BE1600162228 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		774C5C3D2204BDE600162228 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = StackingExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.StackingExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		774C5C3E2204BDE600162228 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = StackingExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.StackingExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		778C98B221E013570066F28A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -439,6 +569,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		774C5C3F2204BDE600162228 /* Build configuration list for PBXNativeTarget "StackingExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				774C5C3D2204BDE600162228 /* Debug */,
+				774C5C3E2204BDE600162228 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		778C989A21E013570066F28A /* Build configuration list for PBXProject "Stacking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

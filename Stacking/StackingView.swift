@@ -29,6 +29,7 @@ open class StackingView: UIScrollView {
 
     private var stackViewWidthOrHeightConstraint: NSLayoutConstraint?
 
+    /// Returns a new stacking view object that manages the provided views.
     public convenience init(arrangedSubviews views: [UIView]) {
         self.init(frame: .zero)
         for view in views {
@@ -64,23 +65,33 @@ open class StackingView: UIScrollView {
 
         stackViewWidthOrHeightConstraint?.isActive = true
     }
+    
+    open override var layoutMargins: UIEdgeInsets {
+        get { return stackView.layoutMargins }
+        set { stackView.layoutMargins = newValue }
+    }
 
+    /// The list of views arranged by the stack view.
     open var arrangedSubviews: [UIView] {
         return stackView.arrangedSubviews
     }
 
+    /// Adds a view to the end of the arrangedSubviews array.
     open func addArrangedSubview(_ view: UIView) {
         stackView.addArrangedSubview(view)
     }
 
+    /// Removes the provided view from the stack’s array of arranged subviews.
     open func removeArrangedSubview(_ view: UIView) {
         stackView.removeArrangedSubview(view)
     }
 
+    /// Adds the provided view to the array of arranged subviews at the specified index.
     open func insertArrangedSubview(_ view: UIView, at stackIndex: Int) {
         stackView.insertArrangedSubview(view, at: stackIndex)
     }
 
+    /// The axis along which the arranged views are laid out. The default value is `horizontal`.
     open var axis: NSLayoutConstraint.Axis {
         get {
             return stackView.axis
@@ -94,36 +105,45 @@ open class StackingView: UIScrollView {
         }
     }
 
+    /// The distribution of the arranged views along the stack view’s axis. The default value is `fill`.
     open var distribution: UIStackView.Distribution {
         get { return stackView.distribution }
         set { stackView.distribution = newValue }
     }
 
+    /// The alignment of the arranged subviews perpendicular to the stack view’s axis. The default value is `fill`.
     open var alignment: UIStackView.Alignment {
         get { return stackView.alignment }
         set { stackView.alignment = newValue }
     }
 
+    /// The distance in points between the adjacent edges of the stack view’s arranged views.
     open var spacing: CGFloat {
         get { return stackView.spacing }
         set { stackView.spacing = newValue }
     }
 
+    /// Applies custom spacing after the specified view.
     @available(iOS 11.0, *)
     open func setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
         stackView.setCustomSpacing(spacing, after: arrangedSubview)
     }
 
+    /// Returns the custom spacing after the specified view.
     @available(iOS 11.0, *)
     open func customSpacing(after arrangedSubview: UIView) -> CGFloat {
         return stackView.customSpacing(after: arrangedSubview)
     }
 
+    /// A Boolean value that determines whether the vertical spacing between views is measured from their baselines.
+    /// The default value is `false`.
     open var isBaselineRelativeArrangement: Bool {
         get { return stackView.isBaselineRelativeArrangement }
         set { stackView.isBaselineRelativeArrangement = newValue }
     }
 
+    /// A Boolean value that determines whether the stack view lays out its arranged views relative to its layout margins.
+    /// The default value is `false`.
     open var isLayoutMarginsRelativeArrangement: Bool {
         get { return stackView.isLayoutMarginsRelativeArrangement }
         set { stackView.isLayoutMarginsRelativeArrangement = newValue}

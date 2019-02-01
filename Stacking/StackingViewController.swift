@@ -23,8 +23,11 @@
 
 import UIKit
 
+/// A view controller that specializes in managing a stacking view.
 open class StackingViewController: UIViewController {
 
+    /// Returns the stacking view managed by the controller object.
+    /// The default layout axis is `vertical`.
     public var stackingView: StackingView! {
         get { return view as? StackingView }
         set { view = newValue }
@@ -33,6 +36,7 @@ open class StackingViewController: UIViewController {
     open override func loadView() {
         let stackingView = StackingView()
         stackingView.axis = .vertical
+        stackingView.backgroundColor = .white
         self.view = stackingView
     }
 }
