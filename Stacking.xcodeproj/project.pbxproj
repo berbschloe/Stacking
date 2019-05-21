@@ -12,6 +12,8 @@
 		774C5C4B2204BE1600162228 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774C5C432204BE1600162228 /* LaunchScreen.storyboard */; };
 		774C5C4C2204BE1600162228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774C5C452204BE1600162228 /* Main.storyboard */; };
 		774C5C4D2204BE1600162228 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774C5C472204BE1600162228 /* AppDelegate.swift */; };
+		7756B573228F5B270003D23A /* Stacking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778C98A021E013570066F28A /* Stacking.framework */; };
+		7756B574228F5B270003D23A /* Stacking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 778C98A021E013570066F28A /* Stacking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		778C98AA21E013570066F28A /* Stacking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778C98A021E013570066F28A /* Stacking.framework */; };
 		778C98AF21E013570066F28A /* StackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C98AE21E013570066F28A /* StackingTests.swift */; };
 		778C98B121E013570066F28A /* Stacking.h in Headers */ = {isa = PBXBuildFile; fileRef = 778C98A321E013570066F28A /* Stacking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -20,6 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7756B575228F5B270003D23A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 778C989721E013570066F28A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 778C989F21E013570066F28A;
+			remoteInfo = Stacking;
+		};
 		778C98AB21E013570066F28A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 778C989721E013570066F28A /* Project object */;
@@ -28,6 +37,20 @@
 			remoteInfo = Stacking;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7756B577228F5B270003D23A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7756B574228F5B270003D23A /* Stacking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		774C5C2E2204BDE500162228 /* StackingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7756B573228F5B270003D23A /* Stacking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,10 +171,12 @@
 				774C5C2A2204BDE500162228 /* Sources */,
 				774C5C2B2204BDE500162228 /* Frameworks */,
 				774C5C2C2204BDE500162228 /* Resources */,
+				7756B577228F5B270003D23A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7756B576228F5B270003D23A /* PBXTargetDependency */,
 			);
 			name = StackingExample;
 			productName = StackingExample;
@@ -205,13 +231,15 @@
 				TargetAttributes = {
 					774C5C2D2204BDE500162228 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					778C989F21E013570066F28A = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					778C98A821E013570066F28A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -292,6 +320,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7756B576228F5B270003D23A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 778C989F21E013570066F28A /* Stacking */;
+			targetProxy = 7756B575228F5B270003D23A /* PBXContainerItemProxy */;
+		};
 		778C98AC21E013570066F28A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 778C989F21E013570066F28A /* Stacking */;
@@ -322,6 +355,7 @@
 		774C5C3D2204BDE600162228 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StackingExample/Info.plist;
@@ -332,7 +366,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.StackingExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -340,6 +374,7 @@
 		774C5C3E2204BDE600162228 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StackingExample/Info.plist;
@@ -350,7 +385,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.StackingExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -499,7 +534,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -525,7 +560,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.Stacking";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -543,7 +578,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.StackingTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -561,7 +596,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brandon-erbschloe.StackingTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

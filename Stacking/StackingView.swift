@@ -27,8 +27,8 @@ open class StackingView: UIScrollView {
 
     private let stackView: UIStackView = UIStackView()
 
-    private var stackViewWidthOrHeightConstraint: NSLayoutConstraint?
-
+    private var stackViewWidthConstraint: NSLayoutConstraint!
+    private var stackViewHeightConstraint: NSLayoutConstraint!
     /// Returns a new stacking view object that manages the provided views.
     public convenience init(arrangedSubviews views: [UIView]) {
         self.init(frame: .zero)
@@ -53,17 +53,13 @@ open class StackingView: UIScrollView {
                 stackView.topAnchor.constraint(equalTo: self.topAnchor),
                 stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
+
+            stackViewWidthConstraint = stackView.widthAnchor.constraint(equalTo: self.widthAnchor)
+            stackViewHeightConstraint = stackView.heightAnchor.constraint(equalTo: self.heightAnchor)
         }
 
-        stackViewWidthOrHeightConstraint?.isActive = false
-
-        if axis == .vertical {
-            stackViewWidthOrHeightConstraint = stackView.widthAnchor.constraint(equalTo: self.widthAnchor)
-        } else {
-            stackViewWidthOrHeightConstraint = stackView.heightAnchor.constraint(equalTo: self.heightAnchor)
-        }
-
-        stackViewWidthOrHeightConstraint?.isActive = true
+        stackViewWidthConstraint.isActive = axis == .vertical
+        stackViewHeightConstraint.isActive = axis == .horizontal
     }
     
     open override var layoutMargins: UIEdgeInsets {
@@ -81,14 +77,31 @@ open class StackingView: UIScrollView {
         stackView.addArrangedSubview(view)
     }
 
+    /// Adds an array of views to the end of the arrangedSubviews array.
+    open func addArrangedSubviews(_ views: [UIView]) {
+        views.forEach(addArrangedSubview(_:))
+    }
+
     /// Removes the provided view from the stack’s array of arranged subviews.
     open func removeArrangedSubview(_ view: UIView) {
         stackView.removeArrangedSubview(view)
     }
 
+    /// Removes the provided views from the stack’s array of arranged subviews.
+    open func removeArrangeSubviews(_ views: [UIView]) {
+        views.forEach(removeArrangedSubview(_:))
+    }
+
     /// Adds the provided view to the array of arranged subviews at the specified index.
     open func insertArrangedSubview(_ view: UIView, at stackIndex: Int) {
         stackView.insertArrangedSubview(view, at: stackIndex)
+    }
+
+    /// Adds the provided views to the array of arranged subviews at the specified index.
+    open func insertArrangeSubviews(_ views: [UIView], at stackIndex: Int) {
+        views.enumerated().forEach { (index, view) in
+            insertArrangedSubview(view, at: stackIndex + index)
+        }
     }
 
     /// The axis along which the arranged views are laid out. The default value is `horizontal`.
