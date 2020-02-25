@@ -27,7 +27,8 @@ class ViewController: StackingViewController {
             makeView(height: 200, backgroundColor: .red),
             makeView(height: 200, backgroundColor: .green),
             makeView(height: 200, backgroundColor: .red),
-            makeView(height: 100, backgroundColor: .yellow)
+            makeView(height: 100, backgroundColor: .yellow),
+            makeView(height: 250, backgroundColor: .purple)
         ])
 
         let firstCell = stackingView.arrangedSubviews.first!
@@ -97,27 +98,34 @@ class ViewController: StackingViewController {
 
     //MARK: - Keyboard
     @objc func keyboardWillShow(notification: NSNotification) {
+        
         let userInfo = notification.userInfo!
         let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
-
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        let newInset = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
+        
+        additionalSafeAreaInsets.bottom = newInset
+        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded();
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        additionalSafeAreaInsets.bottom = 0
+        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded();
         }
     }
 
     @objc func keyboardWillChange(notification: NSNotification) {
+        
         let userInfo = notification.userInfo!
         let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
-
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        let newInset = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
+        
+        additionalSafeAreaInsets.bottom = newInset
 
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded();
