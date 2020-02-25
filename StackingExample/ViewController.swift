@@ -19,9 +19,11 @@ class ViewController: StackingViewController {
         notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
-        stackingView.contentInsetAdjustmentBehavior = .always
-        stackingView.keyboardDismissMode = .interactive
-
+        stackingView.scrollView.keyboardDismissMode = .interactive
+        // Issue on iPhones with notches where the indicator is outsize the content area.
+        // Bumping it by one fixes the misplacement.
+        stackingView.scrollView.scrollIndicatorInsets.top = 1
+        
         stackingView.addArrangedSubviews([
             makeView(height: 100, backgroundColor: .blue),
             makeView(height: 200, backgroundColor: .red),

@@ -23,12 +23,15 @@
 
 import UIKit
 
-open class StackingView: UIScrollView {
+/// A container view that has a stack view embeded into a scroll view.
+open class StackingView: UIView {
 
-    private let stackView: UIStackView = UIStackView()
+    public let scrollView: UIScrollView = UIScrollView()
+    public let stackView: UIStackView = UIStackView()
 
     private var stackViewWidthConstraint: NSLayoutConstraint!
     private var stackViewHeightConstraint: NSLayoutConstraint!
+    
     /// Returns a new stacking view object that manages the provided views.
     public convenience init(arrangedSubviews views: [UIView]) {
         self.init(frame: .zero)
@@ -44,24 +47,33 @@ open class StackingView: UIScrollView {
         if !didSetupConstraints {
             didSetupConstraints = true
 
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(scrollView)
+            
             stackView.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(stackView)
+            scrollView.addSubview(stackView)
 
             NSLayoutConstraint.activate([
-                stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                stackView.topAnchor.constraint(equalTo: self.topAnchor),
-                stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+                scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+                scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                
+                stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+                stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+                stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
             ])
 
-            stackViewWidthConstraint = stackView.widthAnchor.constraint(equalTo: self.widthAnchor)
-            stackViewHeightConstraint = stackView.heightAnchor.constraint(equalTo: self.heightAnchor)
+            stackViewWidthConstraint = stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            stackViewHeightConstraint = stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         }
 
         stackViewWidthConstraint.isActive = axis == .vertical
         stackViewHeightConstraint.isActive = axis == .horizontal
     }
     
+    /// The default spacing to use when laying out content in the view.
     open override var layoutMargins: UIEdgeInsets {
         get { return stackView.layoutMargins }
         set { stackView.layoutMargins = newValue }
