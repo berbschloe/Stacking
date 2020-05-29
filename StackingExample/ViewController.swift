@@ -35,23 +35,20 @@ class ViewController: StackingViewController {
         notificationCenter.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
         stackingView.scrollView.keyboardDismissMode = .interactive
-        stackingView.stackView.spacing = 10
-        stackingView.stackView.isLayoutMarginsRelativeArrangement = true
-        stackingView.stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        // Issue on iPhones with notches where the indicator is outsize the content area.
-        // Bumping it by one fixes the misplacement.
-//        stackingView.scrollView.scrollIndicatorInsets.top = 1
+        stackingView.spacing = 10
+        stackingView.isLayoutMarginsRelativeArrangement = true
+        stackingView.stackingLayoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        [
+        stackingView.addArrangedSubviews([
             makeView(height: 100, backgroundColor: .systemBlue),
             makeView(height: 200, backgroundColor: .systemRed),
             makeView(height: 200, backgroundColor: .systemGreen),
             makeView(height: 200, backgroundColor: .systemRed),
             makeView(height: 100, backgroundColor: .systemYellow),
             makeView(height: 250, backgroundColor: .systemPurple)
-        ].forEach(stackingView.stackView.addArrangedSubview(_:))
+        ])
 
-        let firstCell = stackingView.stackView.arrangedSubviews.first!
+        let firstCell = stackingView.arrangedSubviews.first!
         let textField = BlockableTextField()
         textField.evaluateString = { $0?.count ?? 0 > 5 }
         textField.attributedPlaceholder = NSAttributedString(
@@ -113,17 +110,17 @@ class ViewController: StackingViewController {
     private func makeHorizontalStackingView() -> StackingView {
         let horizontalStackingView = StackingView()
         horizontalStackingView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackingView.stackView.axis = .horizontal
-        horizontalStackingView.stackView.distribution = .fill
-        horizontalStackingView.stackView.spacing = 10
-        horizontalStackingView.stackView.isLayoutMarginsRelativeArrangement = true
-        horizontalStackingView.stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        horizontalStackingView.axis = .horizontal
+        horizontalStackingView.distribution = .fill
+        horizontalStackingView.spacing = 10
+        horizontalStackingView.isLayoutMarginsRelativeArrangement = true
+        horizontalStackingView.stackingLayoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
-        [
+        horizontalStackingView.addArrangedSubviews([
             makeView(width: 100, backgroundColor: .systemPurple),
             makeView(width: 300, backgroundColor: .systemOrange),
             makeView(width: 1000, backgroundColor: .systemPurple)
-        ].forEach(horizontalStackingView.stackView.addArrangedSubview(_:))
+        ])
 
         return horizontalStackingView
     }

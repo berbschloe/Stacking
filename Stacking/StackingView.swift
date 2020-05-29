@@ -87,3 +87,76 @@ open class StackingView: UIView {
         stackViewHeightConstraint.isActive = stackView.axis == .horizontal
     }
 }
+
+extension StackingView {
+    
+    open var stackViewLayoutMargins: UIEdgeInsets {
+        get { return stackView.layoutMargins }
+        set { stackView.layoutMargins = newValue }
+    }
+    
+    open var arrangedSubviews: [UIView] {
+        return stackView.arrangedSubviews
+    }
+
+    open func addArrangedSubview(_ view: UIView) {
+        stackView.addArrangedSubview(view)
+    }
+    
+    open func addArrangedSubview(_ view: UIView, spacing: CGFloat) {
+        if let lastView = stackView.arrangedSubviews.last {
+            stackView.setCustomSpacing(spacing, after: lastView)
+        }
+        stackView.addArrangedSubview(view)
+    }
+    
+    open func addArrangedSubviews(_ views: [UIView]) {
+        views.forEach { stackView.addArrangedSubview($0) }
+    }
+
+    open func removeArrangedSubview(_ view: UIView) {
+        stackView.removeArrangedSubview(view)
+    }
+
+    open func insertArrangedSubview(_ view: UIView, at stackIndex: Int) {
+        stackView.insertArrangedSubview(view, at: stackIndex)
+    }
+
+    open var axis: NSLayoutConstraint.Axis {
+        get { return stackView.axis }
+        set { stackView.axis = newValue }
+    }
+
+    open var distribution: UIStackView.Distribution {
+        get { return stackView.distribution }
+        set { stackView.distribution = newValue }
+    }
+
+    open var alignment: UIStackView.Alignment {
+        get { return stackView.alignment }
+        set { stackView.alignment = newValue }
+    }
+
+    open var spacing: CGFloat {
+        get { return stackView.spacing }
+        set { stackView.spacing = newValue }
+    }
+
+    open func setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
+        stackView.setCustomSpacing(spacing, after: arrangedSubview)
+    }
+
+    open func customSpacing(after arrangedSubview: UIView) -> CGFloat {
+        return stackView.customSpacing(after: arrangedSubview)
+    }
+
+    open var isBaselineRelativeArrangement: Bool {
+        get { return stackView.isBaselineRelativeArrangement }
+        set { stackView.isBaselineRelativeArrangement = newValue }
+    }
+
+    open var isLayoutMarginsRelativeArrangement: Bool {
+        get { return stackView.isLayoutMarginsRelativeArrangement }
+        set { stackView.isLayoutMarginsRelativeArrangement = newValue }
+    }
+}
