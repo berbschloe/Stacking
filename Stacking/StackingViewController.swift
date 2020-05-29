@@ -35,8 +35,12 @@ open class StackingViewController: UIViewController {
 
     open override func loadView() {
         let stackingView = StackingView()
-        stackingView.axis = .vertical
-        stackingView.backgroundColor = .white
+        stackingView.stackView.axis = .vertical
+        if #available(iOS 13.0, *) {
+            stackingView.backgroundColor = .systemBackground
+        } else {
+            stackingView.backgroundColor = .white
+        }
         self.view = stackingView
     }
 }

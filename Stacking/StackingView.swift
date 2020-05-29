@@ -26,151 +26,64 @@ import UIKit
 /// A container view that has a stack view embeded into a scroll view.
 open class StackingView: UIView {
 
-    public let scrollView: UIScrollView = UIScrollView()
-    public let stackView: UIStackView = UIStackView()
+    public let scrollView = UIScrollView()
+    public let stackView = UIStackView()
 
     private var stackViewWidthConstraint: NSLayoutConstraint!
     private var stackViewHeightConstraint: NSLayoutConstraint!
+    
+    private var stackViewAxisObservation: NSKeyValueObservation?
     
     /// Returns a new stacking view object that manages the provided views.
     public convenience init(arrangedSubviews views: [UIView]) {
         self.init(frame: .zero)
         for view in views {
-            addArrangedSubview(view)
+            stackView.addArrangedSubview(view)
         }
     }
+    
+    public override init(frame: CGRect = .zero) {
+        super.init(frame: frame)
+        
+        stackViewAxisObservation = stackView.observe(\.axis) { [weak self] (_, _) in
+            self?.setNeedsUpdateConstraints()
+        }
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(scrollView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stackView)
 
-    private var didSetupConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            stackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
+        ])
+
+        stackViewWidthConstraint = stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        stackViewHeightConstraint = stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+    }
+    
+    @available(*, unavailable)
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        stackViewAxisObservation?.invalidate()
+    }
+    
     open override func updateConstraints() {
         super.updateConstraints()
 
-        if !didSetupConstraints {
-            didSetupConstraints = true
-
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(scrollView)
-            
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            scrollView.addSubview(stackView)
-
-            NSLayoutConstraint.activate([
-                scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                scrollView.topAnchor.constraint(equalTo: self.topAnchor),
-                scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                
-                stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-                stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-                stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-                stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
-            ])
-
-            stackViewWidthConstraint = stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-            stackViewHeightConstraint = stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
-        }
-
-        stackViewWidthConstraint.isActive = axis == .vertical
-        stackViewHeightConstraint.isActive = axis == .horizontal
-    }
-    
-    /// The default spacing to use when laying out content in the view.
-    open override var layoutMargins: UIEdgeInsets {
-        get { return stackView.layoutMargins }
-        set { stackView.layoutMargins = newValue }
-    }
-
-    /// The list of views arranged by the stack view.
-    open var arrangedSubviews: [UIView] {
-        return stackView.arrangedSubviews
-    }
-
-    /// Adds a view to the end of the arrangedSubviews array.
-    open func addArrangedSubview(_ view: UIView) {
-        stackView.addArrangedSubview(view)
-    }
-
-    /// Adds an array of views to the end of the arrangedSubviews array.
-    open func addArrangedSubviews(_ views: [UIView]) {
-        views.forEach(addArrangedSubview(_:))
-    }
-
-    /// Removes the provided view from the stack’s array of arranged subviews.
-    open func removeArrangedSubview(_ view: UIView) {
-        stackView.removeArrangedSubview(view)
-    }
-
-    /// Removes the provided views from the stack’s array of arranged subviews.
-    open func removeArrangeSubviews(_ views: [UIView]) {
-        views.forEach(removeArrangedSubview(_:))
-    }
-
-    /// Adds the provided view to the array of arranged subviews at the specified index.
-    open func insertArrangedSubview(_ view: UIView, at stackIndex: Int) {
-        stackView.insertArrangedSubview(view, at: stackIndex)
-    }
-
-    /// Adds the provided views to the array of arranged subviews at the specified index.
-    open func insertArrangeSubviews(_ views: [UIView], at stackIndex: Int) {
-        views.enumerated().forEach { (index, view) in
-            insertArrangedSubview(view, at: stackIndex + index)
-        }
-    }
-
-    /// The axis along which the arranged views are laid out. The default value is `horizontal`.
-    open var axis: NSLayoutConstraint.Axis {
-        get {
-            return stackView.axis
-
-        }
-        set {
-            if stackView.axis != newValue {
-                stackView.axis = newValue
-                setNeedsUpdateConstraints()
-            }
-        }
-    }
-
-    /// The distribution of the arranged views along the stack view’s axis. The default value is `fill`.
-    open var distribution: UIStackView.Distribution {
-        get { return stackView.distribution }
-        set { stackView.distribution = newValue }
-    }
-
-    /// The alignment of the arranged subviews perpendicular to the stack view’s axis. The default value is `fill`.
-    open var alignment: UIStackView.Alignment {
-        get { return stackView.alignment }
-        set { stackView.alignment = newValue }
-    }
-
-    /// The distance in points between the adjacent edges of the stack view’s arranged views.
-    open var spacing: CGFloat {
-        get { return stackView.spacing }
-        set { stackView.spacing = newValue }
-    }
-
-    /// Applies custom spacing after the specified view.
-    @available(iOS 11.0, *)
-    open func setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
-        stackView.setCustomSpacing(spacing, after: arrangedSubview)
-    }
-
-    /// Returns the custom spacing after the specified view.
-    @available(iOS 11.0, *)
-    open func customSpacing(after arrangedSubview: UIView) -> CGFloat {
-        return stackView.customSpacing(after: arrangedSubview)
-    }
-
-    /// A Boolean value that determines whether the vertical spacing between views is measured from their baselines.
-    /// The default value is `false`.
-    open var isBaselineRelativeArrangement: Bool {
-        get { return stackView.isBaselineRelativeArrangement }
-        set { stackView.isBaselineRelativeArrangement = newValue }
-    }
-
-    /// A Boolean value that determines whether the stack view lays out its arranged views relative to its layout margins.
-    /// The default value is `false`.
-    open var isLayoutMarginsRelativeArrangement: Bool {
-        get { return stackView.isLayoutMarginsRelativeArrangement }
-        set { stackView.isLayoutMarginsRelativeArrangement = newValue}
+        stackViewWidthConstraint.isActive = stackView.axis == .vertical
+        stackViewHeightConstraint.isActive = stackView.axis == .horizontal
     }
 }
