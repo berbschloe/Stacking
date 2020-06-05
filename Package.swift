@@ -1,3 +1,5 @@
+// swift-tools-version:5.1
+
 import PackageDescription
 
 let package = Package(
@@ -11,8 +13,5 @@ let package = Package(
     targets: [
         .target(name: "Stacking", path: "Stacking"),
         .testTarget(name: "StackingTests", dependencies: ["Stacking"]),
-    ],
-    swiftLanguageVersions: [
-        .v5
     ]
 )
