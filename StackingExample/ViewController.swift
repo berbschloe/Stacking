@@ -37,7 +37,7 @@ class ViewController: StackingViewController {
         stackingView.scrollView.keyboardDismissMode = .interactive
         stackingView.spacing = 10
         stackingView.isLayoutMarginsRelativeArrangement = true
-        stackingView.stackingLayoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        stackingView.stackViewLayoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
         stackingView.addArrangedSubviews([
             makeView(height: 100, backgroundColor: .systemBlue),
@@ -114,7 +114,7 @@ class ViewController: StackingViewController {
         horizontalStackingView.distribution = .fill
         horizontalStackingView.spacing = 10
         horizontalStackingView.isLayoutMarginsRelativeArrangement = true
-        horizontalStackingView.stackingLayoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        horizontalStackingView.stackViewLayoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
         horizontalStackingView.addArrangedSubviews([
             makeView(width: 100, backgroundColor: .systemPurple),
